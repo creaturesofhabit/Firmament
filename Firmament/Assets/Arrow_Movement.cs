@@ -9,6 +9,7 @@
         public bool InAir = false;
      
         private Rigidbody2D rb2d;
+        public int TimeInAir = 0;
      
         void Start() {
             rb2d = GetComponent<Rigidbody2D>();
@@ -40,11 +41,17 @@
                     rb2d.velocity = new Vector2(-5f, rb2d.velocity.y);
                 }
             if (Input.GetAxis("Vertical") > 0.1){
-                // if (InAir == false)
-                // {
-                    rb2d.AddForce(new Vector2(0, 100f));
-                    Debug.Log("Iver");
-              //  }
+                 if (TimeInAir < 10)
+                 {
+                    rb2d.AddForce(new Vector2(0, 50f));
+                }
+            }
+            if (InAir) {
+                TimeInAir++;
+
+            }
+            else {
+                TimeInAir = 0;
             }
             // if (InAir == false)
             // {
